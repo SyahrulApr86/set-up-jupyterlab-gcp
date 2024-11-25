@@ -8,6 +8,7 @@ services:
     volumes:
       - ./data:/home/jovyan/work   # Hubungkan direktori lokal `data` ke container
       - jupyter-data:/home/jovyan # Volume untuk persistensi data
+      - conda-envs:/opt/conda/envs # Volume untuk persistensi Conda envs
     environment:
       - JUPYTER_TOKEN=my-token    # Token untuk mengakses JupyterLab
       - NVIDIA_VISIBLE_DEVICES=all # Akses semua GPU NVIDIA
@@ -23,3 +24,5 @@ services:
 volumes:
   jupyter-data:                   # Volume named untuk persistensi data
     name: jupyter-data
+  conda-envs:                     # Volume named untuk persistensi Conda envs
+    name: conda-envs
