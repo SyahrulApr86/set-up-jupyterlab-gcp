@@ -14,3 +14,12 @@ curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | sudo gpg --dear
     sudo tee /etc/apt/sources.list.d/nvidia-container-toolkit.list
 sudo apt-get update -y
 sudo apt-get install -y nvidia-container-toolkit -y
+
+
+####################
+sudo nvidia-ctk runtime configure --runtime=docker
+sudo systemctl restart docker
+sudo nvidia-ctk runtime configure --runtime=containerd
+sudo systemctl restart containerd
+sudo systemctl daemon-reload
+sudo systemctl restart docker
