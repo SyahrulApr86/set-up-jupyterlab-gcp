@@ -6,17 +6,11 @@ services:
       - "8888:8888"  # Map port container ke host
     volumes:
       - ./data:/home/jovyan/work   # Hubungkan direktori lokal `data` ke container
-      - ./environment.yml:/tmp/environment.yml # Salin file environment.yml ke container
       - jupyter-data:/home/jovyan # Volume untuk persistensi data
     environment:
       - JUPYTER_TOKEN=my-token    # Token untuk mengakses JupyterLab
       - NVIDIA_VISIBLE_DEVICES=all # Akses semua GPU NVIDIA
     runtime: nvidia               # Gunakan runtime NVIDIA untuk GPU
-    command: >
-      bash -c "conda env create -f /tmp/environment.yml &&
-               conda clean -afy &&
-               python -m ipykernel install --user --name=myenv --display-name 'Python (myenv)' &&
-               exec jupyter lab --notebook-dir=/home/jovyan --ip=0.0.0.0 --no-browser --allow-root"
     deploy:
       resources:
         reservations:
