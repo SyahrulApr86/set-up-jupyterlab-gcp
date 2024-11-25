@@ -1,0 +1,3 @@
+I am requesting an increase in the quota from 0 to 1 for educational purposes. This quota will be utilized in a learning environment to run and experiment with machine learning and deep learning models as part of my studies and research projects. The activities will include training and testing neural networks, optimizing algorithms, and exploring GPU-based computation for educational experiments.
+
+These resources are essential for hands-on experience in cloud computing and AI development. There are no commercial activities involved. Future growth may require scaling in other regions for additional experiments, but the immediate need is focused on a single region for training purposes.

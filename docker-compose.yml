@@ -1,0 +1,24 @@
+services:
+  jupyter:
+    image: quay.io/jupyter/pytorch-notebook:cuda12-python-3.11.8  # Image PyTorch dengan CUDA 12
+    container_name: jupyterlab_pytorch
+    ports:
+      - "8888:8888"  # Map port container ke host
+    volumes:
+      - ./data:/home/jovyan/work   # Hubungkan direktori lokal `data` ke container
+      - jupyter-data:/home/jovyan # Volume untuk persistensi data
+    environment:
+      - JUPYTER_TOKEN=my-token    # Token untuk mengakses JupyterLab
+      - NVIDIA_VISIBLE_DEVICES=all # Akses semua GPU NVIDIA
+    runtime: nvidia               # Gunakan runtime NVIDIA untuk GPU
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+
+volumes:
+  jupyter-data:                   # Volume named untuk persistensi data
+    name: jupyter-data
