@@ -1,7 +1,7 @@
 services:
   jupyter:
     image: quay.io/jupyter/pytorch-notebook:cuda12-python-3.11.8  # Image PyTorch dengan CUDA 12
-    shm_size: "8g"
+    shm_size: "16g"
     container_name: jupyterlab_pytorch
     ports:
       - "8888:8888"  # Map port container ke host
