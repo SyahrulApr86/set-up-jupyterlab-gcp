@@ -22,8 +22,11 @@ services:
               count: all
               capabilities: [gpu]
     restart: always
+    
 volumes:
   jupyter-data:
+    external: true
     name: jupyter-data
   conda-envs:
+    external: true
     name: conda-envs
