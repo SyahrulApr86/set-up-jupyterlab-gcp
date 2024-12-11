@@ -23,8 +23,6 @@ USER jovyan
 RUN pip install --no-cache-dir \
     jupyterlab-filesystem-access \
     jupyter-archive \
-    jupyterlab-git \
-    jupyterlab-github \
     ipywidgets \
     jlab-enhanced-cell-toolbar \
     jlab-enhanced-launcher \
