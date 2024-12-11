@@ -26,8 +26,6 @@ RUN pip install --no-cache-dir \
     jupyterlab-filesystem-access \
     jupyter-archive \
     ipywidgets \
-    jlab-enhanced-cell-toolbar \
-    jlab-enhanced-launcher \
     jupyterlab-cell-flash \
     jupyterlab-favorites \
     jupyterlab-unfold \
