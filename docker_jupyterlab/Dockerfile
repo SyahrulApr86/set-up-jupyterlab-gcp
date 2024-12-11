@@ -21,6 +21,8 @@ USER jovyan
 
 # Install JupyterLab extensions via pip
 RUN pip install --no-cache-dir \
+    jupyterlab \
+    notebook \
     jupyterlab-filesystem-access \
     jupyter-archive \
     ipywidgets \
@@ -40,12 +42,13 @@ RUN pip install --no-cache-dir \
     pylsp-rope \
     pyls-memestra \
     jupyter_copilot \
-    jupyterlab_widgets
+    jupyterlab_widgets \
+    nbclassic
 
 # Build JupyterLab
-RUN jupyter lab build && \
-    jupyter lab clean
+RUN jupyter lab build --minimize=False
 
 # Konfigurasi default untuk code formatter, LSP, dan Copilot
 COPY jupyter_server_config.py /home/jovyan/.jupyter/
 
+WORKDIR /home/jovyan
