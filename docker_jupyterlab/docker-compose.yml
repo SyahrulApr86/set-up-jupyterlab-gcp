@@ -25,6 +25,8 @@ services:
     
 volumes:
   jupyter-data:
+    external: true
     name: jupyter-data
   conda-envs:
+    external: true
     name: conda-envs

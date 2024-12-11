@@ -49,4 +49,3 @@ RUN jupyter lab build && \
 # Konfigurasi default untuk code formatter, LSP, dan Copilot
 COPY jupyter_server_config.py /home/jovyan/.jupyter/
 
-WORKDIR /home/jovyan/work
