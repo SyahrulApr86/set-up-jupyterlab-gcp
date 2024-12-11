@@ -29,7 +29,6 @@ RUN pip install --no-cache-dir \
     jlab-enhanced-cell-toolbar \
     jlab-enhanced-launcher \
     jupyterlab-cell-flash \
-    jupyterlab-code-toc \
     jupyterlab-favorites \
     jupyterlab-unfold \
     jupyterlab-code-formatter \
