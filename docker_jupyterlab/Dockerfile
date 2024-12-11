@@ -46,8 +46,7 @@ RUN pip install --no-cache-dir \
 
 # Build JupyterLab
 RUN jupyter lab build && \
-    jupyter lab clean && \
-    jupyter cache clean
+    jupyter lab clean
 
 # Konfigurasi default untuk code formatter, LSP, dan Copilot
 COPY jupyter_server_config.py /home/jovyan/.jupyter/
