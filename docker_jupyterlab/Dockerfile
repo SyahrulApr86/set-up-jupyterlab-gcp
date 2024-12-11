@@ -41,15 +41,10 @@ RUN pip install --no-cache-dir \
     python-lsp-black \
     pylsp-rope \
     pyls-memestra \
-    jupyter_copilot
+    jupyter_copilot \
+    jupyterlab_widgets
 
-# Install extensions via jupyter labextension
-RUN jupyter labextension install \
-    @jupyterlab/filebrowser-extension \
-    @jupyterlab/directory-listing \
-    @jupyter-widgets/jupyterlab-manager
-
-# Konfigurasi untuk mengaktifkan fitur drag-and-drop dan build extensions
+# Build JupyterLab
 RUN jupyter lab build && \
     jupyter lab clean && \
     jupyter cache clean
