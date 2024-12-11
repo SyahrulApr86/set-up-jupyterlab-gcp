@@ -5,24 +5,14 @@ services:
     container_name: jupyterlab_pytorch
     ports:
       - "8888:8888"
-      - "9999:9999"
-    user: "1000:1000"
+      - "9999:9999"  # Port for Copilot
     volumes:
-      - ./data:/home/jovyan/work:rw
+      - ./data:/home/jovyan/work
       - jupyter-data:/home/jovyan
       - conda-envs:/opt/conda/envs
     environment:
       - JUPYTER_TOKEN=my-token
       - NVIDIA_VISIBLE_DEVICES=all
-      - NB_UID=1000
-      - NB_GID=1000
-      - CHOWN_HOME=yes
-      - CHOWN_HOME_OPTS=-R
-      - JUPYTER_ENABLE_LAB=yes
-      - GIT_AUTHOR_NAME=${USER}
-      - GIT_COMMITTER_NAME=${USER}
-      - GIT_AUTHOR_EMAIL="${USER}@example.com"
-      - GIT_COMMITTER_EMAIL="${USER}@example.com"
     runtime: nvidia
     deploy:
       resources:
@@ -32,11 +22,8 @@ services:
               count: all
               capabilities: [gpu]
     restart: always
-
 volumes:
   jupyter-data:
-    external: true
     name: jupyter-data
   conda-envs:
-    external: true
     name: conda-envs
