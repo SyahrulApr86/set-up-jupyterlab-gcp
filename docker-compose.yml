@@ -20,7 +20,7 @@ services:
             - driver: nvidia
               count: all
               capabilities: [gpu]
-    restart: always                # Tambahkan ini agar container otomatis dimulai
+    restart: always                
 volumes:
   jupyter-data:                   # Volume named untuk persistensi data
     name: jupyter-data
