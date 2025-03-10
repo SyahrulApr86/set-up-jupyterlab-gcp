@@ -5,13 +5,16 @@ services:
     container_name: jupyterlab_pytorch
     ports:
       - "8888:8888"
-      - "9999:9999"  # Port for Copilot
+      - "9999:9999"  # Port untuk Copilot
     volumes:
       - ./jupyter-data:/home/jovyan  # Bind mount untuk akses dari host
       - conda-envs:/opt/conda/envs
     environment:
       - JUPYTER_TOKEN=my-token
       - NVIDIA_VISIBLE_DEVICES=all
+      - GRANT_SUDO=yes  # Memberikan sudo akses ke jovyan
+      - CHOWN_HOME=yes  # Memastikan kepemilikan direktori user
+      - CHOWN_HOME_OPTS=-R
     runtime: nvidia
     deploy:
       resources:

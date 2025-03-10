@@ -17,6 +17,12 @@ RUN apt-get update && \
 # Verifikasi Node.js version
 RUN node --version && npm --version
 
+# Grant sudo access ke user jovyan
+RUN echo "jovyan ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/jovyan
+
+# Ubah kepemilikan home directory untuk user jovyan
+RUN chown -R jovyan:users /home/jovyan
+
 USER jovyan
 
 # Install JupyterLab extensions via pip
