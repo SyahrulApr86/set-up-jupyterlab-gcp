@@ -20,8 +20,10 @@ RUN node --version && npm --version
 # Grant sudo access ke user jovyan
 RUN echo "jovyan ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/jovyan
 
-# Ubah kepemilikan home directory untuk user jovyan
-RUN chown -R jovyan:users /home/jovyan
+# Pastikan direktori home jovyan dapat diakses
+RUN mkdir -p /home/jovyan/.local && \
+    chown -R jovyan:users /home/jovyan && \
+    chmod -R 777 /home/jovyan/.local
 
 USER jovyan
 
