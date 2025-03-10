@@ -7,13 +7,13 @@ services:
       - "8888:8888"
       - "9999:9999"
     volumes:
-      - ./jupyter-data:/home/jovyan  # Bind mount untuk akses dari host
+      - ./jupyter-data:/home/jovyan
       - conda-envs:/opt/conda/envs
     environment:
       - JUPYTER_TOKEN=my-token
       - NVIDIA_VISIBLE_DEVICES=all
       - CHOWN_HOME=yes
-      - CHOWN_HOME_OPTS=-R  # Hapus tanda kutip untuk menghindari error
+      - CHOWN_HOME_OPTS=-R
     runtime: nvidia
     deploy:
       resources:
@@ -23,7 +23,7 @@ services:
               count: all
               capabilities: [gpu]
     restart: always
-    user: root 
+    user: "1000:100"  # Pastikan user di dalam container sesuai dengan host
 
 volumes:
   conda-envs:
