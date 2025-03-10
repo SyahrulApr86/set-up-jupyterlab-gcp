@@ -3,7 +3,7 @@ FROM quay.io/jupyter/pytorch-notebook:cuda12-python-3.11.8
 
 USER root
 
-# Install system dependencies, Node.js 18.x, dan coreutils
+# Install system dependencies, Node.js 18.x, coreutils, dan sudo
 RUN apt-get update && \
     apt-get install -y \
     zip \
@@ -11,9 +11,14 @@ RUN apt-get update && \
     git \
     curl \
     coreutils \
+    sudo \
     && curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
     && apt-get install -y nodejs \
     && rm -rf /var/lib/apt/lists/*
+
+# Tambahkan user 'jovyan' ke grup sudo dan beri akses tanpa password
+RUN usermod -aG sudo jovyan && \
+    echo "jovyan ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/jovyan
 
 # Tambahkan alias 'll' untuk semua user
 RUN echo "alias ll='ls -l --color=auto'" >> /etc/bash.bashrc
