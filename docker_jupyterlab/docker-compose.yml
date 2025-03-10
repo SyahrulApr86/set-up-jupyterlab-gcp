@@ -13,7 +13,7 @@ services:
       - JUPYTER_TOKEN=my-token
       - NVIDIA_VISIBLE_DEVICES=all
       - CHOWN_HOME=yes
-      - CHOWN_HOME_OPTS='-R'
+      - CHOWN_HOME_OPTS=-R  # Hapus tanda kutip untuk menghindari error
     runtime: nvidia
     deploy:
       resources:
@@ -23,7 +23,7 @@ services:
               count: all
               capabilities: [gpu]
     restart: always
-    user: root  # Jalankan sebagai root agar bisa mengubah kepemilikan direktori
+    user: root 
 
 volumes:
   conda-envs:
