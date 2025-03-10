@@ -1,6 +1,7 @@
 # Base image
 FROM quay.io/jupyter/pytorch-notebook:cuda12-python-3.11.8
 
+# Set user ke root untuk instalasi awal
 USER root
 
 # Install system dependencies, Node.js 18.x, coreutils, dan sudo
@@ -26,6 +27,12 @@ RUN echo "alias ll='ls -l --color=auto'" >> /etc/bash.bashrc
 # Verifikasi bahwa coreutils dan ll tersedia
 RUN ls --version && node --version && npm --version
 
+# Aktifkan Conda base secara default
+RUN echo "source /opt/conda/etc/profile.d/conda.sh && conda activate base" >> /home/jovyan/.bashrc
+RUN echo "source /opt/conda/etc/profile.d/conda.sh && conda activate base" >> /home/jovyan/.profile
+RUN echo "source /opt/conda/etc/profile.d/conda.sh && conda activate base" >> /etc/bash.bashrc
+
+# Pindah ke user jovyan setelah instalasi sistem selesai
 USER jovyan
 
 # Install JupyterLab extensions via pip
@@ -58,4 +65,10 @@ RUN jupyter lab build --minimize=False
 # Konfigurasi default untuk code formatter, LSP, dan Copilot
 COPY jupyter_server_config.py /home/jovyan/.jupyter/
 
+# Set working directory
 WORKDIR /home/jovyan
+
+# Pastikan Conda base aktif dan jalankan JupyterLab saat container berjalan
+ENTRYPOINT ["/bin/bash", "-c", "source /opt/conda/etc/profile.d/conda.sh && conda activate base && exec \"$@\"", "--"]
+
+CMD ["jupyter", "lab", "--ip=0.0.0.0", "--port=8888", "--no-browser", "--allow-root"]
