@@ -3,19 +3,23 @@ FROM quay.io/jupyter/pytorch-notebook:cuda12-python-3.11.8
 
 USER root
 
-# Install system dependencies dan Node.js 18.x
+# Install system dependencies, Node.js 18.x, dan coreutils
 RUN apt-get update && \
     apt-get install -y \
     zip \
     unzip \
     git \
     curl \
+    coreutils \
     && curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
     && apt-get install -y nodejs \
     && rm -rf /var/lib/apt/lists/*
 
-# Verifikasi Node.js version
-RUN node --version && npm --version
+# Tambahkan alias 'll' untuk semua user
+RUN echo "alias ll='ls -l --color=auto'" >> /etc/bash.bashrc
+
+# Verifikasi bahwa coreutils dan ll tersedia
+RUN ls --version && node --version && npm --version
 
 USER jovyan
 
