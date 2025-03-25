@@ -1,0 +1,22 @@
+services:
+  jupyter:
+    build: .
+    shm_size: "12g" 
+    container_name: jupyterlab_pytorch_cpu
+    ports:
+      - "8888:8888"
+      - "9999:9999"
+    volumes:
+      - ./jupyter-data:/home/jovyan  # Bind mount untuk akses dari host
+      - conda-envs:/opt/conda/envs
+    environment:
+      - JUPYTER_TOKEN=my-token
+      - CHOWN_HOME=yes
+      - CHOWN_HOME_OPTS=-R
+    restart: always
+    user: root 
+    command: /bin/bash -c "source /opt/conda/etc/profile.d/conda.sh && conda activate base && jupyter lab --ip=0.0.0.0 --port=8888 --no-browser --allow-root"
+
+volumes:
+  conda-envs:
+    name: conda-envs
